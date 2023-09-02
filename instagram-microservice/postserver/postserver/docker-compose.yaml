@@ -1,0 +1,23 @@
+services:
+    postserver:
+        image: postserver
+        build: .
+        ports:
+        - "5000:5000"
+        depends_on:
+        - db
+        environment:
+        - DB_HOST=db
+        - DB_PORT=5432
+        - DB_NAME=postdb
+        - DB_USER=postgres
+        - DB_PASSWORD=postgres
+    db:
+        image: postgres
+        restart: always
+        environment:
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_USER=postgres
+        - POSTGRES_DB=postdb
+        ports:
+        - "5432:5432"

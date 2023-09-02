@@ -1,0 +1,168 @@
+version: '3.9'
+services:
+    commentserver:
+        image: ilqar/commentserver:0.5
+        ports:
+          - "9595:8080"
+        depends_on:
+            -   commentserverdb
+            - eurekaserver
+        networks:
+            - bridge
+        environment:
+          SPRING_APPLICATION_NAME: commentserver
+          SPRING_PROFILES_ACTIVE: default
+          SPRING_DATA_SOURCE_URL : jdbc:mysql://commentserverdb:3306/commentdb?createDatabaseIfNotExist=true&useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+          EUREKA_URI : http://eurekaserver:8761/eureka/
+        deploy:
+          restart_policy:
+            condition: on-failure
+            delay: 30s
+            max_attempts: 3
+            window: 120s
+
+
+    commentserverdb:
+      image: mysql:8.0
+      cap_add:
+        - SYS_NICE
+      restart: always
+      environment:
+        - MYSQL_DATABASE=commentdb
+        - MYSQL_ROOT_PASSWORD=root
+      ports:
+        - '3307:3306'
+      networks:
+        - bridge
+
+#    adminer:
+#        image: adminer
+#        restart: always
+#        ports:
+#            - "8080:8080"
+    eurekaserver:
+        image: ilqar/eureka:0.4
+        ports:
+          - "8761:8761"
+        networks:
+           - bridge
+        deploy:
+          restart_policy:
+            condition: on-failure
+            delay: 15s
+            max_attempts: 3
+            window: 120s
+        environment:
+          SPRING_APPLICATION_NAME: eurekaserver
+          SPRING_PROFILES_ACTIVE: default
+    postserver:
+      image: ilqar/postserver:0.5
+      ports:
+        - "8082:8082"
+      depends_on:
+        - postserverdb
+      environment:
+        SPRING_APPLICATION_NAME: postserver
+        SPRING_PROFILES_ACTIVE: default
+        EUREKA_URI : http://eurekaserver:8761/eureka/
+        SPRING_DATA_SOURCE_URL: jdbc:mysql://postserverdb:3306/postdb?createDatabaseIfNotExist=true&useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+      networks:
+        - bridge
+      deploy:
+        restart_policy:
+          condition: on-failure
+          delay: 30s
+          max_attempts: 3
+          window: 120s
+    storyserver:
+      image: ilqar/storyserver:0.1
+      ports:
+        - "8081:8081"
+      depends_on:
+        - storyserverdb
+        - eurekaserver
+      networks:
+        - bridge
+      environment:
+        SPRING_APPLICATION_NAME: storyserver
+        SPRING_PROFILES_ACTIVE: default
+        SPRING_DATA_SOURCE_URL: jdbc:mysql://storyserverdb:3306/storydb?createDatabaseIfNotExist=true&useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+        EUREKA_URI : http://eurekaserver:8761/eureka/
+      deploy:
+        restart_policy:
+          condition: on-failure
+          delay: 30s
+          max_attempts: 3
+          window: 120s
+
+    userserver:
+      image: ilqar/userserver:0.1
+      ports:
+       - "8080:8080"
+      depends_on:
+        - userserverdb
+        - eurekaserver
+      networks:
+        - bridge
+      environment:
+        SPRING_APPLICATION_NAME: userserver
+        SPRING_PROFILES_ACTIVE: default
+        SPRING_DATA_SOURCE_URL: jdbc:mysql://userserverdb:3306/userdb?createDatabaseIfNotExist=true&useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+        EUREKA_URI : http://eurekaserver:8761/eureka/
+      deploy:
+        restart_policy:
+          condition: on-failure
+          delay: 30s
+          max_attempts: 3
+          window: 120s
+
+    postserverdb:
+      image: mysql:8.0
+      cap_add:
+        - SYS_NICE
+      restart: always
+      environment:
+        - MYSQL_DATABASE=postdb
+        - MYSQL_ROOT_PASSWORD=root
+      ports:
+        - '3308:3306'
+      networks:
+        - bridge
+
+    storyserverdb:
+      image: mysql:8.0
+      cap_add:
+        - SYS_NICE
+      restart: always
+      environment:
+        - MYSQL_DATABASE=storydb
+        - MYSQL_ROOT_PASSWORD=root
+      ports:
+        - '3309:3306'
+      networks:
+        - bridge
+
+    userserverdb:
+      image: mysql:8.0
+      cap_add:
+        - SYS_NICE
+      restart: always
+      environment:
+        - MYSQL_DATABASE=userdb
+        - MYSQL_ROOT_PASSWORD=root
+      ports:
+        - '3310:3306'
+      networks:
+        - bridge
+volumes:
+  postserverdb:
+    driver: local
+  commentserverdb:
+    driver: local
+  storyserverdb:
+    driver: local
+  userserverdb:
+    driver: local
+
+networks:
+  bridge:

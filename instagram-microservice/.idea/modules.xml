@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/commentserver/commentserver/commentserver.iml" filepath="$PROJECT_DIR$/commentserver/commentserver/commentserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eurekaserver/eurekaserver/eurekaserver.iml" filepath="$PROJECT_DIR$/eurekaserver/eurekaserver/eurekaserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/instagram-microservice.iml" filepath="$PROJECT_DIR$/.idea/instagram-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/postserver/postserver/postserver.iml" filepath="$PROJECT_DIR$/postserver/postserver/postserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/storyserver/storyserver/storyserver.iml" filepath="$PROJECT_DIR$/storyserver/storyserver/storyserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/userservice/userservice/userservice.iml" filepath="$PROJECT_DIR$/userservice/userservice/userservice.iml" />
+    </modules>
+  </component>
+</project>

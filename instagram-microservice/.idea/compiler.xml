@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="eurekaserver" />
+        <module name="storyserver" />
+        <module name="postserver" />
+        <module name="gateway" />
+        <module name="userservice" />
+        <module name="commentserver" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="commentserver" target="17" />
+      <module name="eurekaserver" target="17" />
+      <module name="gateway" target="17" />
+      <module name="postserver" target="17" />
+      <module name="storyserver" target="17" />
+      <module name="userservice" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="commentserver" options="-parameters" />
+      <module name="eurekaserver" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="postserver" options="-parameters" />
+      <module name="storyserver" options="-parameters" />
+      <module name="userservice" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DynamoDBConfiguration">
+    <option name="databaseConfigurations">
+      <map>
+        <entry key="30711696-2575-4b35-8bdc-dcf09309d2e4">
+          <value>
+            <O>
+              <option name="id" value="30711696-2575-4b35-8bdc-dcf09309d2e4" />
+              <option name="label" value="postgres-comment" />
+              <option name="version" value="2" />
+            </O>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="version" value="1" />
+  </component>
+</project>
